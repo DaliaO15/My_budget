@@ -1,16 +1,27 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import csv
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def load_csv(filename):
+    file = open(filename, 'r', encoding="utf-8")
+    expenses = []
+    reader = csv.reader(file)
+    for i, lines in enumerate(reader):
+        if i == 0:
+            headers = [e.lower() for e in lines]
+        else:
+            line_temp = [''.join(lines)]
+            expenses.append(line_temp[0].lower().split(";"))
+    file.close()
+    return headers, expenses
 
 
-# Press the green button in the gutter to run the script.
+def kr_to_float(string_):
+    kronas = float(string_.replace("kr", "").replace(" ", ""))
+    return kronas
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    _, data = load_csv("Expenses.csv")
+    print(data[0])
+    d = kr_to_float(data[0][5])
+    print(d)
