@@ -1,4 +1,7 @@
 import csv
+import pandas as pd
+import numpy as np
+import seaborn as sns
 
 
 def load_csv(filename):
@@ -10,18 +13,24 @@ def load_csv(filename):
             headers = [e.lower() for e in lines]
         else:
             line_temp = [''.join(lines)]
-            expenses.append(line_temp[0].lower().split(";"))
+            tmp = line_temp[0].lower().split(";")
+            tmp[4] = kr_to_float(tmp[4])
+            tmp[5] = kr_to_float(tmp[5])
+            expenses.append(tmp)
     file.close()
     return headers, expenses
 
 
 def kr_to_float(string_):
     kronas = float(string_.replace("kr", "").replace(" ", ""))
-    return kronas
+    return kronas/100
 
 
 if __name__ == '__main__':
     _, data = load_csv("Expenses.csv")
-    print(data[0])
-    d = kr_to_float(data[0][5])
-    print(d)
+    df = pd.DataFrame(data, columns=["Date", "Text", "Type", "Budgetgroup", "Belopp", "Saldo"])
+    grouped = df.groupby('Text').Belopp.sum().sort_values(ascending=True)
+    df_expenses_per_store = grouped.to_frame()
+    print(df_expenses_per_store)
+
+
