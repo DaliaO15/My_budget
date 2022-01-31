@@ -54,4 +54,3 @@ if __name__ == '__main__':
     df_expense = expenses_by_store(df, 25, 210)
     plot_expenses_by_store(df_expense['Text'], df_expense['Belopp'])
     plt.show()
-
