@@ -7,3 +7,5 @@ play with it to see what kind of plots could be generated. The raw data looked a
 
 
 To create some plots with that data, it was necessary to start cleaning it. The function "load_data" prepares everything to be string or float when needed. Then, I just did some group-by and sums to obtain insights for where the money was going and coming. This first plot shows the income and outcome per store/institution, and so on.
+
+![image](https://user-images.githubusercontent.com/74617092/151865659-78840738-5c1f-46ff-a997-5e0e1cf0f280.png)
