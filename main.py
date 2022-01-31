@@ -39,12 +39,13 @@ def expenses_by_store(df, a, b):
 
 def plot_expenses_by_store(xx, yy):
     g = sns.barplot(x=xx, y=yy)
-    g.set_xticklabels(labels=df_expense['Text'], rotation=70, fontsize=7.5, fontweight="bold")
+    new_names = ['store' + str(i) for i in range(0, len(yy))]
+    g.set_xticklabels(labels=new_names, rotation=70, fontsize=7.5, fontweight="bold")
     ticks_loc = g.get_yticks().tolist()
     g.yaxis.set_major_locator(mticker.FixedLocator(ticks_loc))
     g.set_yticklabels([label_format.format(x) for x in ticks_loc], fontsize=7.5, fontweight="bold")
-    g.set_ylabel("Money", color="black", fontsize=15)
-    g.set_xlabel("Store", color="black", fontsize=15)
+    g.set_ylabel("Outcome/Income", color="black", fontsize=15)
+    g.set_xlabel("Store name", color="black", fontsize=15)
     plt.subplots_adjust(bottom=0.35)
 
 
